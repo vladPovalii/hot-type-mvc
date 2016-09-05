@@ -47,5 +47,5 @@ Temporary Items
 .apdisk
 
 # My gitignore list
-view.jpg
+config.js
 /node_modules/*

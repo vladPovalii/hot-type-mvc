@@ -5,6 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// get object with connection information 
+var env = process.env.NODE_ENV || 'development';
+var config = require('./config')[env];
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
