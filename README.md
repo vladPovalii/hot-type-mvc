@@ -9,6 +9,6 @@ simple app for discovering basic functionality of express.js
 $ git clone https://github.com/vladPovalii/hot_type_express.git
 $ cd hot_type_express
 $ npm install
-$ make changes in _config.js file according to your environment and rename it to "config.js"
+$ make changes in config_sample.js file according to your environment and rename it to "config.js"
 $ npm start
 ```
