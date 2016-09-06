@@ -4,7 +4,9 @@ var config = {
         url: 'http://my.site.com',
         //mongodb connection settings
         database: {
+            host:   'localhost',
             port:   '27017',
+            db:     'test'
         },
         //server details
         server: {
@@ -17,7 +19,9 @@ var config = {
         url: 'http://my.site.com',
         //mongodb connection settings
         database: {
+            host: 'localhost',
             port: '27017',
+            db:   'test'
         },
         //server details
         server: {
