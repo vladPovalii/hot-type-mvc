@@ -17,11 +17,21 @@ var app = express();
 
 // connect to mongoDB
 mongoose.connect('mongodb://' + config.database.host + '/' + config.database.db);
+/*
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log("connected!");
 });
+*/
+var Schema = mongoose.Schema;
+
+var TargetSchema = new Schema({
+  value: String
+});
+
+mongoose.model('Target', TargetSchema);
+var Target = mongoose.model('Target');
 
 
 // view engine setup
@@ -38,6 +48,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+//route for the target words
+app.get('/api/targets', function(req, res) {
+  Target.find(function(err, docs) {
+    docs.forEach(function(item) {
+      console.log("Received a GET request for _id: " + item._id);
+    })
+    res.send(docs);
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
