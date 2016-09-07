@@ -21,8 +21,8 @@ var TargetSchema = new Schema({
   value: String
 });
 
-mongoose.model('Target', TargetSchema);
-var Target = mongoose.model('Target');
+mongoose.model('targets', TargetSchema);
+var targets = mongoose.model('targets');
 
 var app = express();
 
@@ -33,7 +33,7 @@ app.use(express.static(__dirname + '/public'));
 
 //route for the target words
 app.get('/api/targets', function(req, res) {
-  Target.find(function(err, docs) {
+  targets.find(function(err, docs) {
     docs.forEach(function(item) {
       console.log("Received a GET request for _id: " + item._id);
     })
