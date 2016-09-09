@@ -2,39 +2,33 @@
 <html lang="en">
 <head>
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="stylesheets/style.css">
 	<meta charset="UTF-8">
-	<title>Backbone Tutorial Blogroll App</title>
+	<title>hot type express</title>
 </head>
 <body>
-	<div class="container">
-		<h1>Backbone Tutorial Blogroll App</h1>
-
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Author</th>
-					<th>Title</th>
-					<th>URL</th>
-					<th>Action</th>
-				</tr>
-				<tr>
-					<td><input class="form-control author-input"></td>
-					<td><input class="form-control title-input"></td>
-					<td><input class="form-control url-input"></td>
-					<td><button class="btn btn-primary add-blog">Add</button></td>
-				</tr>
-			</thead>
-			<tbody class="blogs-list"></tbody>
-		</table>
+	<div class="g-row">    
+		<form id="type_form" class="form-horizontal" role="form" autocomplete=off>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="type_input">TYPE:</label>
+				<div class="col-xs-4">          
+					<input type="input" class="form-control" id="type_input">
+				</div>
+			</div>
+		</form>
+		<div class="type-list"></div>
 	</div>
+	<div class="g-row">
+		<form id="target_form" class="form-horizontal" role="form" autocomplete=off>
+			<div class="form-group">
+				<label class="control-label col-sm-3" for="target_input">Choose a word:</label>
+				<div class="col-xs-5"> 
+					<input type="input" class="form-control" id="target_input">
+				</div>
+			</div>
+		</form>
+	</div>	
 
-	<script type="text/template" class="blogs-list-template">
-	<td><span class="author"><%= author %></span></td>
-	<td><span class="title"><%= title %></span></td>
-	<td><span class="url"><%= url %></span></td>
-	<td><button class="btn btn-warning edit-blog">Edit</button> <button class="btn btn-danger delete-blog">Delete</button><button class="btn btn-success update-blog" style="display:none">Update</button> <button class="btn btn-danger cancel" style="display:none">Cancel</button></td>
-	</script>
-	
 	<script src="bower_components/jquery/dist/jquery.js"></script>
 	<script src="bower_components/underscore/underscore.js"></script>
 	<script src="bower_components/backbone/backbone.js"></script>
