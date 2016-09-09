@@ -1,8 +1,86 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* TYPE-ITEMS */
+#type {
+	margin-top: 15px;
 }
 
-a {
-  color: #00B7FF;
+.type-list {
+  border-top: 1px dotted #666;
+  width: 70%;
+}
+
+.type-item {
+  display: flex;
+  outline: none;
+  border-bottom: 1px dotted #666;
+  height: 50px;
+  overflow: hidden;
+  color: #333;
+  font-weight: 300;
+  font-size: 1.8em;
+  font-weight: 300;
+}
+
+@keyframes fade-title {
+  from { color: #fff; }
+  to { color: #666; }
+}
+
+@keyframes strike-title {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.type-item-title {
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
+  line-height: 50px;
+  outline: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.type-item-title:after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-top: 2px solid #DC0B0B;
+    width: 0;
+    height: 46%;
+    content: '';
+ }
+
+.type-item--striked .type-item-title {
+color: #666;
+}
+
+.type-item--striked .type-item-title:after {
+width: 100%;
+}
+
+.type-item--striked.type-item--status-updated .type-item-title {
+animation: fade-title 120ms ease-in-out;
+}
+
+.type-item--striked.type-item--status-updated .type-item-title:after {
+animation: strike-title 180ms ease-in-out;
+}
+
+
+/* GRID */
+
+.main {
+	display: block;
+}
+
+.g-row {
+	display: inline-block;
+	margin: 20px 60px auto;
+    width: 40%;
+	float: left;    
+}
+
+.g-col {
+  width: 100%;
 }
