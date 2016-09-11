@@ -31,6 +31,8 @@ function ready(){
 	var TypeView = Backbone.View.extend({
 		
 		tagName: "div",
+
+		tpl: _.template($('#item-template').html()),
 		
 		className: "type-item",
 
@@ -53,11 +55,7 @@ function ready(){
 		render: function(){
 			var type_str = this.model.get("value")
 			var type_list = document.querySelector(".type-list");
-			var type_item_title_div = document.createElement("div");
-			var type_title = document.createTextNode(type_str);
-			type_item_title_div.className = "type-item-title";
-			type_item_title_div.appendChild(type_title);
-			this.el.appendChild(type_item_title_div);
+			this.$el.html(this.tpl(type_str));
 			if(!this.inputCheck(type_str)){
 				this.el.classList.add("type-item--striked");
 			}
