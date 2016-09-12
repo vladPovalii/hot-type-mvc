@@ -55,7 +55,9 @@ function ready(){
 		render: function(){
 			var type_str = this.model.get("value")
 			var type_list = document.querySelector(".type-list");
-			this.$el.html(this.tpl(type_str));
+			var tpli = _.template($('#item-template').html());
+			var html = tpli(type_str);
+			this.$el.html(this.tpli(type_str));
 			if(!this.inputCheck(type_str)){
 				this.el.classList.add("type-item--striked");
 			}
