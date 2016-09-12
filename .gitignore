@@ -49,3 +49,4 @@ Temporary Items
 # My gitignore list
 config.js
 /node_modules/*
+bower_components/*
