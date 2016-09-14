@@ -16,7 +16,7 @@ require.config({
 });
 
 require(["jquery", "underscore", "backbone"], function($, _, Backbone){
-
+	$(function() {
 		/* for future sync with server
 		Backbone.Model.prototype.idAttribute = '_id';
 		var TargetModel = Backbone.Model.extend({});
@@ -38,69 +38,65 @@ require(["jquery", "underscore", "backbone"], function($, _, Backbone){
 		});
 		*/
 
-		document.addEventListener("DOMContentLoaded", ready);
+		var FIRST_TYPE = true;
 
-		function ready(){
+		var TypeModel = Backbone.Model.extend({});
 
-			var FIRST_TYPE = true;
-
-			var TypeModel = Backbone.Model.extend({});
-
-			var TypeView = Backbone.View.extend({
-				
-				tagName: "div",
-
-				tpl: _.template($('#item-template').html()),
-				
-				className: "type-item",
-
-				getTarget: function(){
-					return $("#target_input")[0].value;
-				},
-
-				initialize: function(){
-					this.render();
-				},
-
-				inputCheck: function(type_str) {
-					if(type_str === this.getTarget()){
-						return true;
-					}else{
-						return false;
-					}
-				},
-
-				render: function(){
-					var type_str = this.model.get("value")
-					var type_list = document.querySelector(".type-list");
-					this.$el.html(this.tpl({value: type_str}));
-					if(!this.inputCheck(type_str)){
-						this.el.classList.add("type-item--striked");
-					}
-					if(FIRST_TYPE){
-						type_list.appendChild(this.el);	
-						FIRST_TYPE = false;		
-					}else{
-						type_list.insertBefore(this.el, type_list.childNodes[0]);
-					}
-					return this;
-				}
-			});
-
-			$("#target_form").submit(function(event) {
-				event.preventDefault();
-			});
+		var TypeView = Backbone.View.extend({
 			
-			$("#type_form").submit(function(event) {
-				var submit_str = event.target[0].value;
-				if(submit_str !== ""){
-						var word = new TypeModel({"value" : submit_str});
-						var wordView = new TypeView({"model": word});
-						event.target[0].value = "";
-						event.preventDefault();
+			tagName: "div",
+
+			tpl: _.template($('#item-template').html()),
+			
+			className: "type-item",
+
+			getTarget: function(){
+				return $("#target_input")[0].value;
+			},
+
+			initialize: function(){
+				this.render();
+			},
+
+			inputCheck: function(type_str) {
+				if(type_str === this.getTarget()){
+					return true;
 				}else{
-					event.preventDefault();
+					return false;
 				}
-			});
-		}
+			},
+
+			render: function(){
+				var type_str = this.model.get("value")
+				var type_list = document.querySelector(".type-list");
+				this.$el.html(this.tpl({value: type_str}));
+				if(!this.inputCheck(type_str)){
+					this.el.classList.add("type-item--striked");
+				}
+				if(FIRST_TYPE){
+					type_list.appendChild(this.el);	
+					FIRST_TYPE = false;		
+				}else{
+					type_list.insertBefore(this.el, type_list.childNodes[0]);
+				}
+				return this;
+			}
+		});
+
+		$("#target_form").submit(function(event) {
+			event.preventDefault();
+		});
+		
+		$("#type_form").submit(function(event) {
+			var submit_str = event.target[0].value;
+			if(submit_str !== ""){
+					var word = new TypeModel({"value" : submit_str});
+					var wordView = new TypeView({"model": word});
+					event.target[0].value = "";
+					event.preventDefault();
+			}else{
+				event.preventDefault();
+			}
+		});
+	});
 });
