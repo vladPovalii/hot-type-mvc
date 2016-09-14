@@ -62,14 +62,19 @@ require(["jquery", "underscore", "backbone"], function($, _, Backbone){
 				// TODO 
 				// add check for target input
 				var ENTER_KEY = 13;
-				if(event.which !== ENTER_KEY || !this.$type_input.val()) {
+				if(event.which !== ENTER_KEY /*|| !this.$type_input.val()*/ ){
+					if(!this.$type_input.val()){
+						this.timestamp = Date.now();
+					}
 					return;
 				}
 				var type = new TypeModel({
 					"type": this.$type_input.val(),
-					"target": this.$target_input.val()
+					"target": this.$target_input.val(),
+					"time": Date.now() - this.timestamp
 				});
 				var typeView = new TypeView({"model": type});
+				this.timestamp = 0;
 				this.$type_input.val("");
 			}
 
@@ -84,24 +89,25 @@ require(["jquery", "underscore", "backbone"], function($, _, Backbone){
 			className: "type-item",
 
 			initialize: function(){
-				this.FIRST_TYPE = true;
 				this.render();
 			},
 
 			render: function(){
 				var type_str = this.model.get("type");
 				var target_str = this.model.get("target");
+				var type_time = this.model.get("time");
 				var type_list = document.querySelector(".type-list");
 				this.$el.html(this.tpl({value: type_str}));
 				if(type_str !== target_str){
 					this.el.classList.add("type-item--striked");
 				}
-				if(this.FIRST_TYPE){
+				if(FIRST_TYPE){
 					type_list.appendChild(this.el);	
-					this.FIRST_TYPE = false;		
+					FIRST_TYPE = false;		
 				}else{
 					type_list.insertBefore(this.el, type_list.childNodes[0]);
 				}
+				console.log(type_time);
 				return this;
 			}
 		});
