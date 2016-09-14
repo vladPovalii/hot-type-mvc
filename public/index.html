@@ -3,36 +3,60 @@
 <head>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
+	<link href="//db.onlinewebfonts.com/c/63f874d192fb3892d88d5e26f942b5e2?family=DS-Digital" rel="stylesheet" type="text/css"/>
 	<meta charset="UTF-8">
 	<title>hot type express</title>
 </head>
 <body>
-	<div class="g-row">    
-		<form id="type_form" class="form-horizontal" role="form" autocomplete=off>
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="type_input">TYPE:</label>
-				<div class="col-xs-4">          
-					<input type="input" class="form-control" id="type_input">
-				</div>
+	<section id=app>
+		<div class="g-row">
+			<label class="control-label col-sm-2" for="type_input" id="type_label">TYPE:</label>
+			<div class="col-xs-4">
+				<input type="input" class="form-control" id="type_input">
 			</div>
-		</form>
-		<div class="type-list"></div>
-		<script type="text/template" id="item-template">
-			<div class="type-item-title"><%= value %></div>
-		</script>
-  </script>
-	</div>
-	<div class="g-row">
-		<form id="target_form" class="form-horizontal" role="form" autocomplete=off>
+			<div class="type-list"></div>
+			<script type="text/template" id="item-template">
+				<div class="type-item-title"><%= value %></div>
+			</script>
+		</div>
+		<div class="g-row">
 			<div class="form-group">
-				<label class="control-label col-sm-3" for="target_input">Choose a word:</label>
+				<label class="control-label col-sm-3" for="target_input" id="target_label">Choose a word:</label>
 				<div class="col-xs-5"> 
 					<input type="input" class="form-control" id="target_input">
 				</div>
 			</div>
-		</form>
-	</div>	
-
+			<div class="container">
+				<input id="start" name="controls" type="radio" />
+				<input id="stop" name="controls" type="radio" />
+				<input id="reset" name="controls" type="radio" />
+				<div class="timer">
+					<div class="cell">
+						<div class="numbers tensecond movesix">0 1 2 3 4 5 6</div>
+					</div>
+					<div class="cell">
+						<div class="numbers second moveten">0 1 2 3 4 5 6 7 8 9</div>
+					</div>
+					<div class="cell divider"><div class="numbers">:</div></div>
+					<div class="cell">
+						<div class="numbers milisecond moveten">0 1 2 3 4 5 6 7 8 9</div>
+					</div>
+					<div class="cell">
+						<div class="numbers tenmilisecond moveten">0 1 2 3 4 5 6 7 8 9</div>
+					</div>
+					<div class="cell">
+						<div class="numbers hundredmilisecond moveten">0 1 2 3 4 5 6 7 8 9</div>
+					</div>
+				</div>
+				<div id="timer_controls">
+					<label for="start">Start</label>
+					<label for="stop">Stop</label>
+					<label for="reset">Reset</label>
+				</div>
+			</div>
+		</div>	
+	</section>
+	<script src="http://thecodeplayer.com/uploads/js/prefixfree.js" type="text/javascript"></script>
 	<script src="js/libs/requirejs/require.js" data-main="js/main.js" ></script>
 </body>
 </html>
