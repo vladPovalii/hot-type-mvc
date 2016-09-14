@@ -1,11 +1,18 @@
+
 /* TYPE-ITEMS */
-#type {
-	margin-top: 15px;
+#type_label {
+  margin: 7px;
 }
+
+#target_label {
+  margin: 7px;
+  padding-right: 10px;
+} 
 
 .type-list {
   border-top: 1px dotted #666;
-  width: 70%;
+  width: 75%;
+  margin: 50px 0px 0px;
 }
 
 .type-item {
@@ -84,3 +91,86 @@ animation: strike-title 180ms ease-in-out;
 .g-col {
   width: 100%;
 }
+
+/*STOPWATCH STYLES */
+
+.container {
+  padding: 150px 0px 0px 0px;
+}
+
+.timer {
+  padding: 10px;
+  overflow: hidden;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  position: relative;
+}
+
+.cell {
+  width: 45px;
+  height: 65px;
+  font-size: 80px;
+  overflow: hidden;
+  position: relative;
+  float: left;
+}
+
+.numbers {
+  width: 45px;
+  line-height: 70px;
+  font-family: DS-Digital;
+  text-align: center;
+  color: #333;
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  text-shadow: 0 0 5px rgba(255, 255, 255, 1);
+}
+
+#timer_controls {
+  margin-top: -5px;
+}
+
+#timer_controls label {
+  cursor: pointer;
+  padding: 5px 10px;
+  background: #efefef;
+  font-family: arial, verdana, tahoma;
+  font-size: 11px;
+  border-radius: 0 0 3px 3px;
+}
+input[name="controls"] {display: none;}
+
+#stop:checked~.timer .numbers {animation-play-state: paused;}
+#start:checked~.timer .numbers {animation-play-state: running;}
+#reset:checked~.timer .numbers {animation: none;}
+
+.moveten {
+  animation: moveten 1s steps(10, end) infinite;
+  animation-play-state: paused;
+}
+
+.movesix {
+  animation: movesix 1s steps(6, end) infinite;
+  animation-play-state: paused;
+}
+
+.second {animation-duration: 10s;}
+.tensecond {animation-duration: 60s;} 
+.milisecond {animation-duration: 1s;} 
+.tenmilisecond {animation-duration: 0.1s;}
+.hundredmilisecond {animation-duration: 0.01s;}
+
+@keyframes moveten {
+  0% {top: 0;}
+  100% {top: -700px;} 
+}
+
+@keyframes movesix {
+  0% {top: 0;}
+  100% {top: -450px;} 
+}
+
