@@ -95,7 +95,7 @@ animation: strike-title 180ms ease-in-out;
 /*STOPWATCH STYLES */
 
 .container {
-  padding: 150px 0px 0px 0px;
+  padding: 150px 0px 0px 15px;
 }
 
 .timer {
@@ -108,17 +108,17 @@ animation: strike-title 180ms ease-in-out;
 }
 
 .cell {
-  width: 45px;
-  height: 65px;
-  font-size: 80px;
+  width: 50px;
+  height: 75px;
+  font-size: 90px;
   overflow: hidden;
   position: relative;
   float: left;
 }
 
 .numbers {
-  width: 45px;
-  line-height: 70px;
+  width: 50px;
+  line-height: 75px;
   font-family: DS-Digital;
   text-align: center;
   color: #333;
@@ -166,7 +166,7 @@ input[name="controls"] {display: none;}
 
 @keyframes moveten {
   0% {top: 0;}
-  100% {top: -700px;} 
+  100% {top: -750px;} 
 }
 
 @keyframes movesix {
