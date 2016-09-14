@@ -42,6 +42,39 @@ require(["jquery", "underscore", "backbone"], function($, _, Backbone){
 
 		var TypeModel = Backbone.Model.extend({});
 
+		var AppView = Backbone.View.extend({
+			el: "#app",
+
+			events: {
+				"keypress #type_input": "addType"
+			},
+
+			initialize: function(argument) {
+				this.$target_input = $("#target_input");
+				this.$type_input = $("#type_input");
+			},
+
+			targetSubmit: function(event){
+				event.preventDefault();
+			},
+
+			addType: function(event){
+				// TODO 
+				// add check for target input
+				var ENTER_KEY = 13;
+				if(event.which !== ENTER_KEY || !this.$type_input.val()) {
+					return;
+				}
+				var type = new TypeModel({
+					"type": this.$type_input.val(),
+					"target": this.$target_input.val()
+				});
+				var typeView = new TypeView({"model": type});
+				this.$type_input.val("");
+			}
+
+		});
+
 		var TypeView = Backbone.View.extend({
 			
 			tagName: "div",
@@ -50,53 +83,28 @@ require(["jquery", "underscore", "backbone"], function($, _, Backbone){
 			
 			className: "type-item",
 
-			getTarget: function(){
-				return $("#target_input")[0].value;
-			},
-
 			initialize: function(){
+				this.FIRST_TYPE = true;
 				this.render();
 			},
 
-			inputCheck: function(type_str) {
-				if(type_str === this.getTarget()){
-					return true;
-				}else{
-					return false;
-				}
-			},
-
 			render: function(){
-				var type_str = this.model.get("value")
+				var type_str = this.model.get("type");
+				var target_str = this.model.get("target");
 				var type_list = document.querySelector(".type-list");
 				this.$el.html(this.tpl({value: type_str}));
-				if(!this.inputCheck(type_str)){
+				if(type_str !== target_str){
 					this.el.classList.add("type-item--striked");
 				}
-				if(FIRST_TYPE){
+				if(this.FIRST_TYPE){
 					type_list.appendChild(this.el);	
-					FIRST_TYPE = false;		
+					this.FIRST_TYPE = false;		
 				}else{
 					type_list.insertBefore(this.el, type_list.childNodes[0]);
 				}
 				return this;
 			}
 		});
-
-		$("#target_form").submit(function(event) {
-			event.preventDefault();
-		});
-		
-		$("#type_form").submit(function(event) {
-			var submit_str = event.target[0].value;
-			if(submit_str !== ""){
-					var word = new TypeModel({"value" : submit_str});
-					var wordView = new TypeView({"model": word});
-					event.target[0].value = "";
-					event.preventDefault();
-			}else{
-				event.preventDefault();
-			}
-		});
+		var appView = new AppView(); 
 	});
 });
