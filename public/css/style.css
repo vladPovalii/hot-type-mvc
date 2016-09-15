@@ -10,21 +10,36 @@
 } 
 
 .type-list {
-  border-top: 1px dotted #666;
-  width: 75%;
+  width: 90%;
   margin: 50px 0px 0px;
+}
+
+.type-list-separator{
+  max-width: 70%;
+  border-top: 1px dotted #666;
 }
 
 .type-item {
   display: flex;
   outline: none;
-  border-bottom: 1px dotted #666;
   height: 50px;
   overflow: hidden;
   color: #333;
   font-weight: 300;
   font-size: 1.8em;
   font-weight: 300;
+}
+
+.type-item-inner-container {
+  width: 70%;
+  border-bottom: 1px dotted #666;
+}
+
+.type-item-time {
+  color: #27a908;
+  font-size: 1.3em;
+  margin: 3px 18px 0px;
+  font-family: DS-Digital;
 }
 
 @keyframes fade-title {
@@ -39,6 +54,7 @@
 
 .type-item-title {
   display: inline-block;
+  border-bottom: 1px dotted #666;
   position: relative;
   max-width: 100%;
   line-height: 50px;
@@ -59,19 +75,19 @@
  }
 
 .type-item--striked .type-item-title {
-color: #666;
+  color: #666;
 }
 
 .type-item--striked .type-item-title:after {
-width: 100%;
+  width: 100%;
 }
 
 .type-item--striked.type-item--status-updated .type-item-title {
-animation: fade-title 120ms ease-in-out;
+  animation: fade-title 120ms ease-in-out;
 }
 
 .type-item--striked.type-item--status-updated .type-item-title:after {
-animation: strike-title 180ms ease-in-out;
+  animation: strike-title 180ms ease-in-out;
 }
 
 
