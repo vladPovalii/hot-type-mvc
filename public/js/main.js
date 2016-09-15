@@ -52,6 +52,8 @@ require(["jquery", "underscore", "backbone"], function($, _, Backbone){
 			initialize: function(argument) {
 				this.$target_input = $("#target_input");
 				this.$type_input = $("#type_input");
+				this.$stopwatch_start = $("#start");
+				this.$stopwatch_reset = $("#reset");
 			},
 
 			targetSubmit: function(event){
@@ -65,6 +67,7 @@ require(["jquery", "underscore", "backbone"], function($, _, Backbone){
 				if(event.which !== ENTER_KEY /*|| !this.$type_input.val()*/ ){
 					if(!this.$type_input.val()){
 						this.timestamp = Date.now();
+						this.$stopwatch_start.click();
 					}
 					return;
 				}
@@ -75,6 +78,7 @@ require(["jquery", "underscore", "backbone"], function($, _, Backbone){
 				});
 				var typeView = new TypeView({"model": type});
 				this.timestamp = 0;
+				this.$stopwatch_reset.click();
 				this.$type_input.val("");
 			}
 
