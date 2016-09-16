@@ -56,10 +56,6 @@ require(["jquery", "underscore", "backbone"], function($, _, Backbone){
 				this.$stopwatch_reset = $("#reset");
 			},
 
-			targetSubmit: function(event){
-				event.preventDefault();
-			},
-
 			addType: function(event){
 				// TODO 
 				// add check for target input
