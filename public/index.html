@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" herf="css/introjs.min.css">
+	<link rel="stylesheet" herf="css/introjs-rtl.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link href="//db.onlinewebfonts.com/c/63f874d192fb3892d88d5e26f942b5e2?family=DS-Digital" rel="stylesheet" type="text/css"/>
 	<meta charset="UTF-8">
@@ -9,13 +11,17 @@
 </head>
 <body>
 	<section id=app>
+		<div class="header-main">
+			<h1>Welcome to hot type!</h1>
+		</div>
+		<div class="separator header-main-separator"></div>
 		<div class="g-row">
 			<label class="control-label col-sm-2" for="type_input" id="type_label">TYPE:</label>
 			<div class="col-xs-4">
 				<input type="input" class="form-control" id="type_input">
 			</div>
 			<div class="type-list">
-				<div class="type-list-separator"></div>
+				<div class="separator"></div>
 				<script type="text/template" id="item-template">
 					<div class="type-item-inner-container">
 						<div class="type-item-title"><%= value %></div>
@@ -26,7 +32,7 @@
 		</div>
 		<div class="g-row">
 			<div class="form-group">
-				<label class="control-label col-sm-3" for="target_input" id="target_label">Choose a word:</label>
+				<label class="control-label col-sm-3" for="target_input" id="target_label">TARGET:</label>
 				<div class="col-xs-5"> 
 					<input type="input" class="form-control" id="target_input">
 				</div>

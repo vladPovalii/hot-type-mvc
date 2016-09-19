@@ -1,12 +1,16 @@
 
 /* TYPE-ITEMS */
 #type_label {
-  margin: 7px;
+  margin-top: 4px;
+  font-family: consolas;
+  font-size: large;
 }
 
 #target_label {
-  margin: 7px;
+  margin-top: 4px;
   padding-right: 10px;
+  font-size: large;
+  font-family: consolas;
 } 
 
 .type-list {
@@ -14,9 +18,14 @@
   margin: 50px 0px 0px;
 }
 
-.type-list-separator{
+.separator{
   max-width: 70%;
   border-top: 1px dotted #666;
+}
+
+.header-main-separator{
+  margin-left: 3%;
+  max-width: 94%;
 }
 
 .type-item {
@@ -90,6 +99,12 @@
   animation: strike-title 180ms ease-in-out;
 }
 
+.header-main {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  font-family: consolas;
+}
 
 /* GRID */
 
@@ -99,8 +114,8 @@
 
 .g-row {
 	display: inline-block;
-	margin: 20px 60px auto;
-    width: 40%;
+	margin: 18px 40px auto;
+  width: 40%;
 	float: left;    
 }
 
