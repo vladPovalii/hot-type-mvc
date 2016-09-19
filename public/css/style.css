@@ -101,8 +101,8 @@
 
 .header-main {
   text-align: center;
-  margin-top: 40px;
-  margin-bottom: 30px;
+  margin: 35px auto 30px;
+  max-width: 700px;
   font-family: consolas;
 }
 
@@ -125,7 +125,7 @@
 
 /*STOPWATCH STYLES */
 
-.container {
+.stopwatch-container {
   padding: 150px 0px 0px 15px;
 }
 
