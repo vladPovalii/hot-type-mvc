@@ -15,7 +15,7 @@ require.config({
 	}
 });
 
-require(["jquery", "underscore", "backbone"], function($, _, Backbone){
+require(["jquery", "underscore", "backbone","libs/introjs/intro.min" ], function($, _, Backbone){
 	$(function() {
 		/* for future sync with server
 		Backbone.Model.prototype.idAttribute = '_id';
