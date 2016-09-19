@@ -15,7 +15,7 @@ require.config({
 	}
 });
 
-require(["jquery", "underscore", "backbone","libs/introjs/intro.min" ], function($, _, Backbone){
+require(["jquery", "underscore", "backbone","libs/introjs/intro.min" ], function($, _, Backbone, Introjs){
 	$(function() {
 		/* for future sync with server
 		Backbone.Model.prototype.idAttribute = '_id';
@@ -46,14 +46,29 @@ require(["jquery", "underscore", "backbone","libs/introjs/intro.min" ], function
 			el: "#app",
 
 			events: {
-				"keypress #type_input": "addType"
+				"keypress #type_input": "addType",
+				"click #type_input": "typeClicked",
 			},
+
+			typeClicked: function(){
+				if (this.introEnabled){
+					this.intro.exit();
+					this.introEnabled = false;
+
+					this.delegateEvents();
+				}
+			},
+
+			introEnabled: false,
 
 			initialize: function(argument) {
 				this.$target_input = $("#target_input");
 				this.$type_input = $("#type_input");
 				this.$stopwatch_start = $("#start");
 				this.$stopwatch_reset = $("#reset");
+				this.introEnabled = true;
+				this.intro = Introjs();
+				this.intro.start();
 			},
 
 			addType: function(event){
@@ -63,6 +78,7 @@ require(["jquery", "underscore", "backbone","libs/introjs/intro.min" ], function
 				if(event.which === ENTER_KEY && !this.$type_input.val()){
 					return;
 				}
+
 				if(event.which !== ENTER_KEY){
 					if(!this.$type_input.val()){
 						this.timestamp = Date.now();
