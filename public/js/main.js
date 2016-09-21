@@ -94,6 +94,7 @@ require(["jquery", "underscore", "backbone","libs/introjs/intro.min" ], function
 				});
 				// debug
 				var aproxTime = Date.now();
+				console.log("end timestamp, aprox: " + aproxTime + " differece: " + (aproxTime - this.timestamp));
 				// debug
 				var typeView = new TypeView({"model": type});
 				this.timestamp = 0;
