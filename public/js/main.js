@@ -116,12 +116,20 @@ require(["jquery", "underscore", "backbone","libs/introjs/intro.min" ], function
 			},
 
 			formatTime(timestamp){
-				var t = (timestamp/1000).toString();
-				if(t.length === 5){
-					return "0" + t[0] + ":" + t.slice(2, 5);
-				}else{
-					return t.slice(0, 2) + ":" + t.slice(3, 6);
+				var spl = (timestamp/1000).toString().split(".");
+				if(spl[0] === "0"){
+					spl[0] = "00";
+				}else if(spl[0].length === 1){
+					spl[0] = "0" + spl[0];
 				}
+				if(spl[1] === "0"){
+					spl[1] = "000"
+				}else if(spl[1].length === 1){
+					spl[1] = spl[1] + "00"
+				}else if(spl[1].length === 2){
+					spl[1] = spl[1] + "0"
+				}
+				return spl[0] + ":" + spl[1];
 			},
 
 			render: function(){
