@@ -80,9 +80,6 @@ require(["jquery", "underscore", "backbone","libs/introjs/intro.min" ], function
 				if(event.which !== ENTER_KEY){
 					if(!this.$type_input.val()){
 						this.timestamp = Date.now();
-						// debug
-						console.log("start timestamp: " + this.timestamp);
-						// debug
 						this.$stopwatch_start.click();
 					}
 					return;
@@ -92,10 +89,6 @@ require(["jquery", "underscore", "backbone","libs/introjs/intro.min" ], function
 					"target": this.$target_input.val(),
 					"time": Date.now() - this.timestamp
 				});
-				// debug
-				var aproxTime = Date.now();
-				console.log("end timestamp, aprox: " + aproxTime + " differece: " + (aproxTime - this.timestamp));
-				// debug
 				var typeView = new TypeView({"model": type});
 				this.timestamp = 0;
 				this.$stopwatch_reset.click();
