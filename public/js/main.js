@@ -42,6 +42,18 @@ require(["jquery", "underscore", "backbone","libs/introjs/intro.min" ], function
 
 		var TypeModel = Backbone.Model.extend({});
 
+		var TypeCollection = Backbone.Collection.extend({
+			model : TypeModel,
+
+			initialize: function(){
+				this.view = new TypeCollectionView();
+			},
+
+			addType: function(type){
+				this.view.renderType(type)
+			}
+		});
+
 		var AppView = Backbone.View.extend({
 			el: "#app",
 
@@ -59,7 +71,9 @@ require(["jquery", "underscore", "backbone","libs/introjs/intro.min" ], function
 
 			introEnabled: false,
 
-			initialize: function(argument) {
+			initialize: function() {
+				this.collection = new TypeCollection();
+				this.collection.on("add", this.collection.addType);
 				this.$target_input = $("#target_input");
 				this.$type_input = $("#type_input");
 				this.$stopwatch_start = $("#start");
@@ -69,46 +83,7 @@ require(["jquery", "underscore", "backbone","libs/introjs/intro.min" ], function
 				this.intro.start();
 			},
 
-			addType: function(event){
-				// TODO 
-				// add check for target input
-				var ENTER_KEY = 13;
-				if(event.which === ENTER_KEY && !this.$type_input.val()){
-					return;
-				}
-
-				if(event.which !== ENTER_KEY){
-					if(!this.$type_input.val()){
-						this.timestamp = Date.now();
-						this.$stopwatch_start.click();
-					}
-					return;
-				}
-				var type = new TypeModel({
-					"type": this.$type_input.val(),
-					"target": this.$target_input.val(),
-					"time": Date.now() - this.timestamp
-				});
-				var typeView = new TypeView({"model": type});
-				this.timestamp = 0;
-				this.$stopwatch_reset.click();
-				this.$type_input.val("");
-			}
-		});
-
-		var TypeView = Backbone.View.extend({
-			
-			tagName: "div",
-
-			tpl: _.template($('#item-template').html()),
-			
-			className: "type-item",
-
-			initialize: function(){
-				this.render();
-			},
-
-			formatTime(timestamp){
+			formatTimestamp(timestamp){
 				var spl = (timestamp/1000).toString().split(".");
 				if(spl[0] === "0"){
 					spl[0] = "00";
@@ -124,33 +99,92 @@ require(["jquery", "underscore", "backbone","libs/introjs/intro.min" ], function
 				}
 				return spl[0] + ":" + spl[1];
 			},
+			
+			addType: function(event){
+				var ENTER_KEY = 13;
+				if(event.which === ENTER_KEY && !this.$type_input.val()){
+					return;
+				}
 
-			render: function(){
-				var type_str = this.model.get("type");
-				var target_str = this.model.get("target");
-				if(type_str !== target_str){
+				if(event.which !== ENTER_KEY){
+					if(!this.$type_input.val()){
+						this.timestamp = Date.now();
+						this.$stopwatch_start.click();
+					}
+					return;
+				}
+				/*
+				var type = new TypeModel({
+					"type": this.$type_input.val(),
+					"isCorrect": this.$target_input.val(),
+					"time": Date.now() - this.timestamp
+				});
+				*/
+				this.collection.add({
+					"type": this.$type_input.val(),
+					"isCorrect": this.$target_input.val() === this.$type_input.val(),
+					"time": this.formatTimestamp(Date.now() - this.timestamp)
+				});
+
+				//var typeView = new TypeView({"model": type});
+				this.timestamp = 0;
+				this.$stopwatch_reset.click();
+				this.$type_input.val("");
+			}
+		});
+
+		var TypeView = Backbone.View.extend({
+			
+			tagName: "div",
+
+			tpl: _.template($('#item-template').html()),
+			
+			className: "type-item",
+
+			initialize: function(){
+
+			},
+
+			render: function(model){
+				if(!model.get("isCorrect")){
 					this.el.classList.add("type-item--striked");
 					this.$el.html(this.tpl({
-						value: type_str,
+						value: model.get("type"),
 						time: ""
 					}));
 				}else{
-					var time_str = this.formatTime(this.model.get("time"));
+					var time_str = model.get("time");
 					this.$el.html(this.tpl({
-						value: type_str,
-						time: time_str
+						value: model.get("type"),
+						time: model.get("time")
 					}));
 				}
-				var type_list = document.querySelector(".type-list");
-				if(FIRST_TYPE){
-					type_list.appendChild(this.el);	
-					FIRST_TYPE = false;		
-				}else{
-					type_list.insertBefore(this.el, type_list.childNodes[2]);
-				}
-				return this;
+				return this.el;
 			}
 		});
+
+		var TypeCollectionView = Backbone.View.extend({
+			el: $(".type-list"),	
+
+			initialize: function(){
+				this.typeView = new TypeView();
+			},
+
+			render: function(){
+
+			},
+
+			renderType: function(type){
+				typeEl = this.typeView.render(type);
+				if(FIRST_TYPE){
+					this.el.appendChild(typeEl);	
+					FIRST_TYPE = false;		
+				}else{
+					this.el.insertBefore(typeEl, this.el.childNodes[2]);
+				}
+			}
+		})
+
 		var appView = new AppView(); 
 	});
 });
