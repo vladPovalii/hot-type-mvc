@@ -164,7 +164,7 @@ require(["jquery", "underscore", "backbone","libs/introjs/intro.min" ], function
 		});
 
 		var TypeCollectionView = Backbone.View.extend({
-			el: $(".type-list"),	
+			el: ".type-list",	
 
 			initialize: function(){
 				this.typeView = new TypeView();
